@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Kenny Wong">
+    <meta name="description" content="The Hong Kong biggest cinema">
+    <meta name="keywords" content="city cinema, city, cinema">
+    <link rel="stylesheet" href="../css/4print.css"> 
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png" />
+    <title>Print - Kenny's Cinema</title>
+    <script>
+      window.addEventListener("load", () => {
+              //  movie_time  movie_name  movie_house  movie_index  movie_cinema
+              let url = new URL(window.location.href);
+        let movie_time= url.searchParams.get("movie_time");
+        let movie_name= url.searchParams.get("movie_name");
+        let movie_house= url.searchParams.get("movie_house");
+        let movie_index= url.searchParams.get("movie_index");
+        let movie_cinema= url.searchParams.get("movie_cinema");
+        document.querySelector(".movie > :nth-child(1)").innerHTML = "<span>Cinema: </span> " + movie_cinema;
+
+        document.querySelector(".movie > :nth-child(2)").innerHTML = "<span>Movie: </span> " + movie_name + "        (Show index: " + movie_index + ")";
+        document.querySelector(".movie > :nth-child(3)").innerHTML = "<span>Time: </span> " + movie_time;
+        document.querySelector(".movie > :nth-child(4)").innerHTML = "<span>House: </span> " + movie_house;
+        let seats = url.searchParams.get("selected-seats");
+        let seats_arr = seats.split(" ");
+        //remove the last index in the array
+        seats_arr.pop();
+        console.log(seats_arr);
+        document.querySelector(".movie > :nth-child(5)").innerHTML = "<span>Seats: </span> ";
+        for(let i=0; i<seats_arr.length; i++){
+          document.querySelector(".movie > :nth-child(5)").innerHTML += ((seats_arr[i])+ "  ");
+        }
+
+        document.querySelector(".movie > :nth-child(6)").innerHTML = "<span>Total: </span> " + seats_arr.length*100 + " HKD " + " (100 HKD each)";
+
+    })
+
+    function print_rec(){
+      window.print();
+    }
+    </script>
+</head>
+<body>
+  <div id="banner">
+    <a href="1home.html">
+      <img id="banner_logo" src="../images/logo.png" alt="Kenny's Cinema" />
+    </a> 
+    <h1>Kenny's Cinema</h1>
+  </div>
+  <header>
+    <a href="1home.html">
+      <img id="logo_img" src="../images/logo.png" alt="Kenny's Cinema" />
+      <h1 id="company_n">Kenny's Cinema</h1>
+    </a>
+    <nav>
+      <a href="1home.html" class="nav-item"> home </a>
+      <a href="2now_showing.html" class="nav-item"> now showing </a>
+      <a href="3ticket.html" class="nav-item"> tickets </a>
+    </nav>
+  </header>
+<div class="movie_template">
+  <img src="../images/logo.png" alt="Kenny's Cinema" />
+  <div class="movie">
+    <p> <span>Cinema: </span> - - -</p>
+    <p> <span>Date Time:</span> - - -</p>
+    <p><span>Movie:</span> - - -</p>
+    <p><span>House No:</span> - - -</p>
+    <p><span>Seat:</span> - - -</p>
+    <p><span>Price:</span> - - -</p>
+</div>
+<div class="company_ft">
+  <p>Kenny's Cinema Limited OFFICIAL RECEIPT</p> 
+  <img src="../images/logo.png" alt="Kenny's Cinema" />
+</div>
+</div>
+
+    <footer>
+      <p>&copy;Copyright of resources belong to Kenny</p>
+      <button id="print" onclick="print_rec();">Print</button>
+      <a href="1home.html">Home</a>
+      <a href="5design.html">Design</a>
+    </footer>
+</body>
+</html>

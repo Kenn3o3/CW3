@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body onclick="myFunction(event)">
+
+    <ul id="nowlist">
+        <li class="movie">
+            <img class="thumbnail">
+            <ul class="details">
+                <li class="name"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </li>
+    </ul>
+
+<script type="module">
+    import {getMovies} from './movies.js';
+    let now_list = document.getElementById("nowlist");
+    let movies = getMovies();
+
+    for(let i=0;i<movies.length;i++){
+        let MovieLi = document.createElement('li');
+        let thumbnail = document.createElement('img');
+        let details = document.createElement('ul');
+        let moviename = document.createElement('li');
+        let cast = document.createElement('li');
+        let director = document.createElement('li');
+        let duration = document.createElement('li');
+        //big list item
+        now_list.appendChild(MovieLi); MovieLi.className = "movie";
+        //thumbnail
+        MovieLi.appendChild(thumbnail); thumbnail.className = "thumbnail"; 
+        thumbnail.src = movies[i].thumbnail;
+        thumbnail.id = movies[i].name;
+        thumbnail.alt = movies[i].name;
+        //details
+        details.appendChild(moviename); moviename.className = "name"; moviename.innerText = movies[i].name;
+        details.appendChild(cast); cast.innerText = "Cast: "+movies[i].cast;
+        details.appendChild(director); director.innerText = "Director: "+movies[i].director;
+        details.appendChild(duration); duration.innerText = "Duration: "+movies[i].duration+" mins";
+        MovieLi.appendChild(details); details.className = "details";
+        console.log("finished");
+    }
+</script>
+</body>
+</html>

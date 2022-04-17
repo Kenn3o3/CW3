@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenny's Cinema - Design</title>
+</head>
+<body>
+    <h1>Basic info</h1>
+    <p>author: Wong Lik Hang Kenny</p>
+    <p>sid: 57166465</p>
+    <h1>Javascript</h1>  
+    <p>all requirements of the CW3 should be met</p>
+    <img src="../images/HTML_eventListener.png" width="400px" alt="">
+    <p>the first type of Event handler (set up in HTML) is used in line 82 of 4print.html </p>
+    <img src="../images/Javascript_EventListener.png" width="400px" alt="">
+    <p>the second addEventListener (set up in JAVASCRIPT) is used in line 93 of 1home.html </p>
+    <h1>design ideas</h1>
+    <h3>Home page</h3>
+    <p>1. reduce the logo size, make the navigation bar as 1-row size, and fixed at top</p>
+    <p>2. use a modern font-family </p>
+    <p>3. put all related items in one singe box/column (carousel slider for the up coming movies and now showing movies)</p>
+    <h3>Now showing page</h3>
+    <p>change the style of textboxes and buttons</p>
+    <p>resize the maps</p>
+    <p>make sure that the cursor won't change when hovering at description textboxes (containing movie names)</p>
+    <p>I may change the image to hero image with styling as well</p>
+    <h3>Tickets page</h3>
+    <p>resize the size of seat imgs</p>
+    <p>align the whole seating plan in center</p>
+    <p>make the imgs of seat click-able</p>
+    <h3>Print page</h3>
+    <p>remake the format to make it looks like a movie ticket</p>
+    <h1>HTML</h1>
+    <p>section is used in the home page so the general content can be styled by css as a group</p>
+    <p>"div"s are used as small groups so we can style the group individually by group later</p>
+    <p>3 forms are used in the tickets page and so I can use data attributes to relate corresponding data</p>
+    <h1>CSS</h1>
+    <p>The general layout for every page:</p>
+    <img src="../images/CW2_layout.png" alt="" style="width: 300px;">
+    <p>4 stylesheets are created for home page, now showing page, ticket page and print page respectively</p>
+    <p>for the banner we align the icon and the company name at the center vertically, we have applied animation to the icon that makes it moves from left to right and then back to middle on top of the company name with ease-in-out property to make the whole animation smoother</p>
+    <p>for the nav bar, we set the flex flow to column when the screen size is smaller than 600px so the items in nav bar can be shown in a better way.</p>
+    <p>for the footer, we centered all the items vertically as the cw required we seperate the "design pages and home pages" and the copyright information into two side so as to make it look better</p>
+    <p>for the home page, 3 sections are used and one of the sections - best section is used for best movie of the week specifically and it will occupy 2 column when the page width is smaller than 601px. The other 2 are for the Nowing showing and Upcoming movies, one container is used for each movie to align the movie details and thumbnails horizontally</p>
+    <p>now showing page and ticket page have the similar layout as the home page</p>
+    <h1>CSS3 features</h1>
+    <p>the CSS3 features that I used in the CW are:
+        Box Shadow, Text Shadows,  border-radius, :is(), aspect-ratio,
+    </p>
+    <h3>box-shadow</h3>
+    <p>for the box-showdow, we applied it to all the boxes in header and footer:</p>
+    <p>header,
+        footer {
+          box-shadow: 0 0 4px 2px #0003;
+        }</p>
+    <h3>text-shadow</h3>
+    <p>for the text-shadow, we applied it on the items on navbar:</p>
+    <p>p.nav-item {
+        padding: 0.5em;
+        color: white;
+        font-size: 1.5rem;
+        text-shadow: 2px 2px 4px #0005;
+      }
+      </p>
+    <h3>border-radius</h3>
+    <p>for the border-radius, we used it on the thumbnails of the movies in the home page</p>
+    <p>  ul > li > img {
+        border: white solid 3px;
+        border-radius: 10px;
+      }</p>
+    <h3>:is()</h3>
+    <p>we used this classing method on the a,nav in headers</p>
+    <p>  header,
+        header > :is(a, nav),
+        footer {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+        }
+      </p>
+    <h3>aspect-ratio</h3>
+    <p>we used this property on the video in best section in the home page:</p>
+    <p>  section.best video {
+        width: min(510px, 80vw);
+        aspect-ratio: 4 / 3;
+        border-radius: 1rem;
+      }
+    </p>
+
+</body>
+</html>

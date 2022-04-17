@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=MuseoModerno&family=Roboto&display=swap");
+
+@keyframes slidein {
+    0% {
+      transform: translateX(0);
+    }
+    33% {
+      transform: translateX(100%);
+    }
+    66% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+body {
+  background-color: #363636;
+
+}
+
+
+html {
+  font-size: clamp(12px, 1.75vw, 18px);
+}
+
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+main {
+  background-color: #272727;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 2rem max(5vw, 2rem);
+}
+@media (max-width: 600px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+header,
+footer {
+  box-shadow: 0 0 4px 2px #0003;
+}
+
+header,
+footer {
+  padding: 1em 5vw;
+  background-color: #363636;
+
+  font-family: "MuseoModerno", cursive;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+header {
+  top: 0px;
+  position: sticky;
+  justify-content: space-between;
+}
+
+#banner a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#banner {
+  width: 100%;
+  height: 25vh;
+  background-color: #363636;
+  background-size: cover;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+#banner_logo {
+  width: 80px;
+  transition: all 0.4s ease;
+  animation: slidein 3s ease-in-out;
+}
+
+#banner_logo:hover {
+  width: 100px;
+}
+
+#logo_img {
+  width: 4rem;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  box-shadow: 0 0 4px 2px #0002;
+}
+
+header a:first-child:hover > #logo_img {
+  transform: rotate(360deg) scale(1.06);
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-flow: column;
+  }
+}
+
+header,
+header > :is(a, nav),
+footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+p.nav-item {
+  padding: 0.5em;
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 4px #0005;
+}
+
+.nav-item:hover {
+  cursor: default;
+}
+
+header nav a {
+  padding: 0.5em;
+  font-size: 1.2rem;
+}
+
+:is(header nav, footer) a:hover {
+  transform: scale(1.08);
+  text-shadow: 2px 2px 4px #0005;
+}
+  
+#company_n {
+  transition: all 0.2s ease;
+}
+  
+#company_n:hover {
+  transform: scale(1.05);
+  text-shadow: 2px 2px 4px #0005;
+}
+  
+footer {
+  color: white;
+  gap: 0.5em;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+  
+footer p {
+  margin-right: auto;
+}
+  
+footer a {
+  padding: 0.5em;
+}
+
+.movie_template {
+  display: grid;
+  justify-items: center;
+  background-color: #272727;
+  padding: 2rem;
+  box-shadow: 0 0 4px 2px #0003;
+  border: 2px solid white;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  color: black;
+}
+
+.company_ft {
+  display: flex;
+  align-items: center;
+}
+
+.company_ft img {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.movie {
+  display: grid;
+  text-shadow: 2px 2px 4px #0005;
+  justify-items: left;
+}
+
+.movie_template img {
+  width: 80px;
+}
+
+.movie p {
+  margin: 10px;
+  padding: 10px;
+}
+
+.movie p span {
+  font-weight: bold;
+}
+
+#print {
+  background-color: transparent;
+  padding: 0.5em;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+#print:hover {
+  transform: scale(1.08);
+  text-shadow: 2px 2px 4px #0005;
+}

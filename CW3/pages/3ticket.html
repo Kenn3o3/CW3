@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Kenny Wong">
+    <meta name="description" content="The Hong Kong biggest cinema">
+    <meta name="keywords" content="city cinema, city, cinema, ">  
+    <title>Tickets - Kenny's Cinema</title>
+    <link rel="stylesheet" href="../css/3ticket.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png" />
+    <script>
+      window.addEventListener("load", () => {
+        let url = new URL(window.location.href);
+
+      let selected_time = url.searchParams.get("timeslot");
+      let arr = selected_time.split("|");
+      let time = arr[0];
+      let index = arr[1];
+      let house = arr[2];
+      let cinema = url.searchParams.get("cinema");
+      let movie = url.searchParams.get("movie");
+
+      //sent data: cinema, movie, timeslot(with index), house
+      // movie_time  movie_name  movie_house  movie_index  movie_cinema
+      document.querySelector("#movie_time").value = time;
+      document.querySelector("#movie_name").value = movie;
+      document.querySelector("#movie_house").value = house;
+      document.querySelector("#movie_index").value = index;
+      document.querySelector("#movie_cinema").value = cinema;
+      
+      let confirmed = [];
+
+      //seats
+      document.querySelectorAll('.seat').forEach(item => {
+        item.addEventListener('click', e => {
+          if(item.classList.contains('seat')){
+            e.target.classList.remove('seat');
+            e.target.classList.add('occupied');
+            confirmed.push(e.target);
+
+            document.querySelector("#selected-seats").value += (e.target.id + " ");
+            }
+          })
+        })
+
+        document.querySelector("#reset").onclick = (() => {
+          for(let i=0; i< confirmed.length; i++){
+            confirmed[i].classList.remove('occupied');
+            confirmed[i].classList.add('seat');
+          }
+          confirmed =[];
+
+          });
+
+
+
+//        <!-- .details > nth-child(3)" --> movie name
+document.querySelector(".details > :nth-child(3)").innerHTML = "Movie: " + movie + "        (Show index: " + index + ")"; console.log(movie);
+//        <!-- .details > nth-child(4)" --> time
+document.querySelector(".details > :nth-child(4)").innerHTML = "Time: " + time; console.log(time);
+//        <!-- .details > nth-child(5)" --> cinema
+document.querySelector(".details > :nth-child(5)").innerHTML = "Cinema: " + cinema; console.log(cinema);
+//        <!-- .details > nth-child(6)" --> house
+document.querySelector(".details > :nth-child(6)").innerHTML = "House: " + house; console.log(house);
+
+
+
+
+      });
+    </script>
+</head>
+<div id="banner">
+  <a href="1home.html">
+    <img id="banner_logo" src="../images/logo.png" alt="Kenny's Cinema" />
+  </a> 
+  <h1>Kenny's Cinema</h1>
+</div>
+<header>
+  <a href="1home.html">
+    <img id="logo_img" src="../images/logo.png" alt="Kenny's Cinema" />
+    <h1 id="company_n">Kenny's Cinema</h1>
+  </a>
+  <nav>
+    <a href="1home.html" class="nav-item"> home </a>
+    <a href="2now_showing.html" class="nav-item"> now showing </a>
+    <p class="nav-item"> tickets </p>
+  </nav>
+</header>
+
+    <div class="container">
+      <div class = "details">
+        <h1>details</h1> 
+
+        <h3>- - - - - - - - - - - - - - - - -</h3>
+
+        <h3> <span>Please select a movie in nowshowing page before using this page!!!!</span> </h3>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+      </div>
+
+
+      <div class="seats_booking">
+        <div class="screen"><p>screen</p></div>
+        <div class="seats_group">
+          <div class="group_item s_label" ></div>
+          <div class="group_item s_label"><p>1</p></div>
+          <div class="group_item s_label"><p>2</p></div>
+          <div class="group_item s_label"><p>3</p></div>
+          <div class="group_item s_label"><p>4</p></div>
+          <div class="group_item s_label"><p>5</p></div>
+          <div class="group_item s_label"><p>6</p></div>
+          <div class="group_item s_label"><p>A</p></div>
+          <div class="group_item seat" id="A1"></div>
+          <div class="group_item seat" id="A2"></div>
+          <div class="group_item seat" id="A3"></div>
+          <div class="group_item seat" id="A4"></div>
+          <div class="group_item seat" id="A5"></div>
+          <div class="group_item seat" id="A6"></div>
+          <div class="group_item s_label"><p>B</p></div>
+          <div class="group_item seat" id="B1"></div>
+          <div class="group_item seat" id="B2"></div>
+          <div class="group_item seat" id="B3"></div>
+          <div class="group_item seat" id="B4"></div>
+          <div class="group_item seat" id="B5"></div>
+          <div class="group_item seat" id="B6"></div>
+          <div class="group_item s_label"><p>C</p></div>
+          <div class="group_item seat" id="C1"></div>
+          <div class="group_item seat" id="C2"></div>
+          <div class="group_item seat" id="C3"></div>
+          <div class="group_item seat" id="C4"></div>
+          <div class="group_item seat" id="C5"></div>
+          <div class="group_item seat" id="C6"></div>
+          <div class="group_item s_label"><p>D</p></div>
+          <div class="group_item seat" id="D1"></div>
+          <div class="group_item seat" id="D2"></div>
+          <div class="group_item seat" id="D3"></div>
+          <div class="group_item seat" id="D4"></div>
+          <div class="group_item seat" id="D5"></div>
+          <div class="group_item seat" id="D6"></div>
+          <div class="group_item s_label"><p>E</p></div>
+          <div class="group_item seat" id="E1"></div>
+          <div class="group_item seat" id="E2"></div>
+          <div class="group_item seat" id="E3"></div>
+          <div class="group_item seat" id="E4"></div>
+          <div class="group_item seat" id="E5"></div>
+          <div class="group_item seat" id="E6"></div>
+          <div class="group_item s_label"><p>F</p></div>
+          <div class="group_item seat" id="F1"></div>
+          <div class="group_item seat" id="F2"></div>
+          <div class="group_item seat" id="F3"></div>
+          <div class="group_item seat" id="F4"></div>
+          <div class="group_item seat" id="F5"></div>
+          <div class="group_item seat" id="F6"></div>
+        </div>
+      </div>
+
+
+      <div class="confirm">
+        <form action="4print.html" method="get">
+          <label for="selected-seats">Your have selected: </label>
+          <input type="hidden" id="movie_time" name="movie_time" value="">
+          <input type="hidden" id="movie_name" name="movie_name" value="">
+          <input type="hidden" id="movie_house" name="movie_house" value="">
+          <input type="hidden" id="movie_index" name="movie_index" value="">
+          <input type="hidden" id="movie_cinema" name="movie_cinema" value="">
+          <input type="text" id="selected-seats" name="selected-seats" value="" placeholder="booked seat box" readonly>
+          <input type="submit" value="Confirm">
+          <input id="reset" type="reset" value="Reset">
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy;Copyright of resources belong to Kenny</p>
+      <a href="1home.html">Home</a>
+      <a href="5design.html">Design</a>
+    </footer>
+
+</body>
+</html>

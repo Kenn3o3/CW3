@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Kenny" />
+    <meta name="description" content="The biggest cinema in the world" />
+    <meta name="keywords" content="city cinema, city, cinema, " />
+    <title>Home - Kenny's Cinema</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png" />
+    <link rel="stylesheet" href="../css/1home.css" media="all" />
+    <script src="../script/movies.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+      let movies=getMovies();
+      
+      //set the best movie
+      for(let i=0; i<movies.length; i++) {
+          if(movies[i].type=="now") {
+              let first_Now=movies[i];
+              //name
+              document.querySelector("section.best ul.details > :first-child").innerHTML=first_Now.name;
+              //cast
+              document.querySelector("section.best ul.details > :nth-child(2)").innerHTML="cast: "+first_Now.cast;
+              //director
+              document.querySelector("section.best ul.details > :nth-child(3)").innerHTML="director: "+first_Now.director;
+              //duration
+              document.querySelector("section.best ul.details > :nth-child(4)").innerHTML="duration: "+first_Now.duration+" min";
+              break;
+          }
+      }
+  
+      //loop the best movie with now showing movies list with 2 seconds delay
+      let vid_no = 0;
+      document.querySelector('video').addEventListener("ended", e => {
+          setTimeout(() => {
+              document.querySelector('video').src = movies[vid_no].src;
+  
+              document.querySelector("section.best ul.details > :first-child").innerHTML=movies[vid_no].name;
+              //cast
+              document.querySelector("section.best ul.details > :nth-child(2)").innerHTML="cast: "+ movies[vid_no].cast;
+              //director
+              document.querySelector("section.best ul.details > :nth-child(3)").innerHTML="director: "+ movies[vid_no].director;
+              //duration
+              document.querySelector("section.best ul.details > :nth-child(4)").innerHTML="duration: "+ movies[vid_no].duration+" mins";
+              vid_no++;
+              if(vid_no == movies.length) { vid_no = 0;}
+          }, 2000)
+        }, {passive: true});
+
+        //play the video in best section in repoonse to the thumbnail click in upcoming movies section
+        //create a thumbnail array
+        // adding the movies 
+        let now_list = document.getElementById("nowlist");
+        let up_list = document.getElementById("upcominglist");
+
+    for(let i=0;i<movies.length;i++){
+        let MovieLi = document.createElement('li');
+        let thumbnail = document.createElement('img');
+        let details = document.createElement('ul');
+        let moviename = document.createElement('li');
+        let cast = document.createElement('li');
+        let director = document.createElement('li');
+        let duration = document.createElement('li');
+        //thumbnail
+        MovieLi.appendChild(thumbnail); thumbnail.className = "thumbnail"; 
+        thumbnail.src = movies[i].thumbnail;
+        thumbnail.id = movies[i].name;
+        thumbnail.alt = movies[i].name;
+        //details
+        moviename.className = "name"; moviename.innerText = movies[i].name;
+        cast.innerText = "Cast: "+movies[i].cast;
+        director.innerText = "Director: "+movies[i].director;
+        duration.innerText = "Duration: "+movies[i].duration+" mins";
+        details.className = "details";
+        details.appendChild(moviename);
+        details.appendChild(cast); 
+        details.appendChild(director); 
+        details.appendChild(duration); 
+        MovieLi.appendChild(details); 
+        MovieLi.className = "movie";
+      if(movies[i].type=="now"){ 
+        //big list item
+        now_list.appendChild(MovieLi); 
+      } else {
+        //big list item
+        up_list.appendChild(MovieLi); 
+      }
+    }
+
+        
+        document.querySelectorAll('.thumbnail').forEach(item => {
+        item.addEventListener('click', event => {
+            //handle click
+            vid_no = (movies.findIndex(movie => movie.name == event.target.id ));
+            document.querySelector('video').src = movies[vid_no].src;
+            console.log("hello");
+            document.querySelector("section.best ul.details > :first-child").innerHTML=movies[vid_no].name;
+            //cast
+            document.querySelector("section.best ul.details > :nth-child(2)").innerHTML="cast: "+ movies[vid_no].cast;
+            //director
+            document.querySelector("section.best ul.details > :nth-child(3)").innerHTML="director: "+ movies[vid_no].director;
+            //duration
+            document.querySelector("section.best ul.details > :nth-child(4)").innerHTML="duration: "+ movies[vid_no].duration+" mins";
+          });
+        })
+
+
+  })
+
+    </script>
+  </head>
+
+
+
+  <body>
+  
+    <div id="banner">
+      <a href="1home.html">
+        <img id="banner_logo" src="../images/logo.png" alt="Kenny's Cinema" />
+      </a> 
+      <h1>Kenny's Cinema</h1>
+    </div>
+    <header>
+      <a href="1home.html">
+        <img id="logo_img" src="../images/logo.png" alt="Kenny's Cinema" />
+        <h1 id="company_n">Kenny's Cinema</h1>
+      </a>
+      <nav>
+        <p class="nav-item"> home </p>
+        <a href="2now_showing.html" class="nav-item"> now showing </a>
+        <a href="3ticket.html" class="nav-item"> tickets </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="best">
+        <h2>BEST MOVIES OF THE WEEK:</h2>
+        <div class="movie">
+          <video autoplay controls poster="../images/logo.png">
+            <source
+              src="https://courses.cs.cityu.edu.hk/cs2204/video/wonders.mp4"
+            />
+            <source
+              src="https://courses.cs.cityu.edu.hk/cs2204/video/wonders.ogg"
+            />
+            Video not supported
+          </video>
+          <ul class="details">
+            <li>Wonders</li>
+            <li>Cast: Elon Musk</li>
+            <li>Director: Elon Musk</li>
+            <li>Duration: 130 mins</li>
+          </ul>
+        </div>
+      </section>
+
+
+
+      <section class="nowShowing">
+        <h2>Now Showing Movies</h2>
+        <ul id="nowlist">
+        </ul>
+      </section>
+
+      <section class="upcoming">
+        <h2>Up Coming Movies</h2>
+        <ul id="upcominglist">
+        </ul>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy;Copyright of resources belong to Kenny</p>
+      <a href="1home.html">Home</a>
+      <a href="5design.html">Design</a>
+    </footer>
+  </body>
+
+</html>

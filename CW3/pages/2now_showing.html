@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Kenny Wong">
+    <meta name="description" content="The Hong Kong biggest cinema">
+    <meta name="keywords" content="city cinema, city, cinema, ">  
+    <title>Now showing - Kenny's Cinema</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png" />
+    <link rel="stylesheet" href="../css/2now_showing.css">
+    <script src="../script/cinemas.js"></script>
+    <script src="../script/movies.js"></script>
+    <script>
+window.addEventListener("load", () => {
+
+
+        let cinemas = getCinemas();
+        let movies = getMovies();
+        //set the select options
+
+        for(let i = 0; i<cinemas.length; i++) {
+            let option = document.createElement("option");
+            option.innerHTML = cinemas[i].branchName;
+            option.value = cinemas[i].branchName;
+            document.querySelector("select").appendChild(option);
+        }
+
+        let Selected_Cinema = document.querySelector("select").value;
+        let cin_index = (cinemas.findIndex(cinema => cinema.branchName == Selected_Cinema ));
+        let movies_no = cinemas[cin_index].movies.length;
+
+
+
+        for(let i = 0; i<movies_no; i++){
+          let movie_id = (cinemas[cin_index].movies[i].id)-1;
+            let form_container = document.querySelector("div.select_form");
+            let movie_form = document.createElement("form");
+            movie_form.action = "3ticket.html";
+            movie_form.method = "get";
+            //first input
+            let form_cinema_name = document.createElement("input");
+            form_cinema_name.type = "hidden";
+            form_cinema_name.name = "cinema";
+            form_cinema_name.value = Selected_Cinema;
+            let movie_label = document.createElement("label");
+            let movie_input = document.createElement("input");
+            let movie_name = movies[movie_id].name; 
+            movie_input.id = movie_name;
+            movie_input.type = "text";
+            movie_input.name = "movie";
+            movie_input.value = movie_name;
+            movie_input.readOnly = true;
+            let img_div = document.createElement("div");
+            let img = document.createElement("img");
+            img.src = movies[movie_id].thumbnail;
+            img.alt = movies[movie_id].name;
+            img_div.appendChild(img);
+            let timeslot_label = document.createElement("label");
+            timeslot_label.innerHTML = "Select a timeslot:";
+            let select_time = document.createElement("select");
+            select_time.name = "timeslot";
+
+            let timeslot_no = cinemas[cin_index].movies[i].shows.length;
+            for(let j = 0; j<timeslot_no; j++){
+                let option = document.createElement("option");
+                option.innerHTML = (cinemas[cin_index].movies[i].shows[j].datetime)+" house "+cinemas[cin_index].movies[i].shows[j].house;
+                option.value = (cinemas[cin_index].movies[i].shows[j].datetime)+"|"+(cinemas[cin_index].movies[i].shows[j].index)+"|"+(cinemas[cin_index].movies[i].shows[j].house);
+                select_time.appendChild(option);
+            }
+            
+            let submit_but = document.createElement("input");
+            submit_but.type = "submit";
+            submit_but.value = "Buy Ticket";
+            movie_form.appendChild(form_cinema_name);
+            movie_form.appendChild(movie_label);
+            movie_form.appendChild(movie_input);
+            movie_form.appendChild(img_div);
+            movie_form.appendChild(timeslot_label);
+            movie_form.appendChild(select_time);
+            movie_form.appendChild(submit_but);
+            form_container.appendChild(movie_form); 
+            
+          }
+        document.querySelector("#cinema").addEventListener("change", e => {
+          document.querySelector(".select_form").innerHTML = '';
+          let Selected_Cinema = document.querySelector("select").value;
+        let cin_index = (cinemas.findIndex(cinema => cinema.branchName == Selected_Cinema ));
+        let movies_no = cinemas[cin_index].movies.length;
+
+        for(let i = 0; i<movies_no; i++){
+          let movie_id = (cinemas[cin_index].movies[i].id)-1;
+            let form_container = document.querySelector("div.select_form");
+            let movie_form = document.createElement("form");
+            movie_form.action = "3ticket.html";
+            movie_form.method = "get";
+            //first input
+            let form_cinema_name = document.createElement("input");
+            form_cinema_name.type = "hidden";
+            form_cinema_name.name = "cinema";
+            form_cinema_name.value = Selected_Cinema;
+            let movie_label = document.createElement("label");
+            let movie_input = document.createElement("input");
+            let movie_name = movies[movie_id].name; 
+            movie_input.id = movie_name;
+            movie_input.type = "text";
+            movie_input.name = "movie";
+            movie_input.value = movie_name;
+            movie_input.readOnly = true;
+            let img_div = document.createElement("div");
+            let img = document.createElement("img");
+            img.src = movies[movie_id].thumbnail;
+            img.alt = movies[movie_id].name;
+            img_div.appendChild(img);
+            let timeslot_label = document.createElement("label");
+            timeslot_label.innerHTML = "Select a timeslot:";
+            let select_time = document.createElement("select");
+            select_time.name = "timeslot";
+            select_time.id = cinemas[cin_index].movies[i].id;
+
+            let timeslot_no = cinemas[cin_index].movies[i].shows.length;
+            for(let j = 0; j<timeslot_no; j++){
+              let option = document.createElement("option");
+                option.innerHTML = (cinemas[cin_index].movies[i].shows[j].datetime)+" house "+cinemas[cin_index].movies[i].shows[j].house;
+                option.value = (cinemas[cin_index].movies[i].shows[j].datetime)+"|"+(cinemas[cin_index].movies[i].shows[j].index)+"|"+(cinemas[cin_index].movies[i].shows[j].house); //use split to get the time and house and index.
+                select_time.appendChild(option);
+            }
+
+            let submit_but = document.createElement("input");
+            submit_but.type = "submit";
+            submit_but.value = "Buy Ticket";
+            movie_form.appendChild(form_cinema_name);
+            movie_form.appendChild(movie_label);
+            movie_form.appendChild(movie_input);
+            movie_form.appendChild(img_div);
+            movie_form.appendChild(timeslot_label);
+            movie_form.appendChild(select_time);
+            movie_form.appendChild(submit_but);
+            form_container.appendChild(movie_form); 
+            
+          }
+        });
+      });
+        </script>
+
+  </head>
+<body>
+  <div id="banner">
+    <a href="1home.html">
+      <img id="banner_logo" src="../images/logo.png" alt="Kenny's Cinema" />
+    </a> 
+    <h1>Kenny's Cinema</h1>
+  </div>
+  <header>
+    <a href="1home.html">
+      <img id="logo_img" src="../images/logo.png" alt="Kenny's Cinema" />
+      <h1 id="company_n">Kenny's Cinema</h1>
+    </a>
+    <nav>
+      <a href="1home.html" class="nav-item"> home </a>
+      <p class="nav-item"> now showing </p>
+      <a href="3ticket.html" class="nav-item"> tickets </a>
+    </nav>
+  </header>
+      <!-- select cinema -->
+      <section class="SelectCinema">
+        <label for="cinema">Select a cinema:</label>
+        <select name="cinema" id="cinema">
+        </select>
+
+
+        <!-- selecct movies -->
+      </section>
+      <div class="SelectMovie">
+        <h4>Select a movie</h4>
+        
+        <div class="select_form">
+          <!-- modified by javascript -->
+       </div>
+      
+      </div>
+
+
+
+
+<div class="map_container">
+  <h1>
+    Our Locations
+  </h1>
+  <div class="maps">
+    <div class="location">
+      <p>Kenny's Cinema - Central</p>
+      <img src="../images/Central_map.png" alt="">  
+    </div>
+    <div class="location">
+      <p>Kenny's Cinema - Causeway Bay</p>
+      <img src="../images/Causeway_Bay_map.png" alt="">
+
+    </div>
+    <div class="location">
+      <p>Kenny's Cinema - Kowloon City</p>
+      <img src="../images/Kowloon_City_map.png" alt="">
+
+    </div>
+    <div class="location">
+      <p>Kenny's Cinema - MongKok</p>
+      <img src="../images/Mongkok_map.png" alt="">
+    </div>
+  </div>
+
+</div>
+      <footer>
+        <p>&copy;Copyright of resources belong to Kenny</p>
+        <a href="1home.html">Home</a>
+        <a href="5design.html">Design</a>
+      </footer>
+  
+</body>
+</html>
